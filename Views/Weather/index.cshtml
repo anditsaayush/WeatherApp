@@ -1,0 +1,22 @@
+﻿@model WeatherApp.Models.Weather
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+
+<h2>Weather App</h2>
+
+<form asp-action="Index" method="post">
+    <input type="text" name="city" placeholder="Enter city name" />
+    <button type="submit">Get Weather</button>
+</form>
+
+@if (Model != null)
+{
+    <h3>Weather in @Model.City</h3>
+    <p>Description: @Model.Description</p>
+    <p>Temperature: @Model.Temperature °C</p>
+    <p>Feels Like: @Model.FeelsLike °C</p>
+    <p>Humidity: @Model.Humidity %</p>
+}
