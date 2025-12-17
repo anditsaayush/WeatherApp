@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using WeatherApp.Models; // Make sure this namespace matches your Models folder
+using WeatherApp.Models; 
 
 namespace WeatherApp.Services
 {
@@ -15,7 +15,7 @@ namespace WeatherApp.Services
             _httpClient = httpClient;
         }
 
-        // Your GetWeatherAsync method goes here
+        // GetWeatherAsync method goes here
         public async Task<Weather> GetWeatherAsync(string city)
         {
             var url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=c2b45bd83132818cab2744dd6fcd7916&units=metric";
