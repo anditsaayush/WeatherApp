@@ -1,22 +1,184 @@
 ﻿@model WeatherApp.Models.Weather
-@if (ViewBag.Error != null)
-{
-    <p style="color:red">@ViewBag.Error</p>
-}
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+
+        <div class="display-3 mb-3">
+            🌤️
+        </div>
+
+        <h1 class="fw-bold">
+            Weather
+        </h1>
+
+        <p class="text-muted">
+            Check the current weather anywhere in the world.
+        </p>
+
+    </div>
 
 
-<h2>Weather App</h2>
+    <!-- Search -->
+    <div class="row justify-content-center mb-4">
 
-<form asp-action="Index" method="post">
-    <input type="text" name="city" placeholder="Enter city name" />
-    <button type="submit">Get Weather</button>
-</form>
+        <div class="col-md-8 col-lg-6">
 
-@if (Model != null)
-{
-    <h3>Weather in @Model.City</h3>
-    <p>Description: @Model.Description</p>
-    <p>Temperature: @Model.Temperature °C</p>
-    <p>Feels Like: @Model.FeelsLike °C</p>
-    <p>Humidity: @Model.Humidity %</p>
-}
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-4">
+
+                    <form asp-action="Index" method="post">
+
+                        <label for="city" class="form-label fw-semibold">
+                            Search for a city
+                        </label>
+
+                        <div class="input-group input-group-lg">
+
+                            <input type="text"
+                                   id="city"
+                                   name="city"
+                                   class="form-control"
+                                   placeholder="e.g. Kathmandu"
+                                   autocomplete="off"
+                                   required />
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4">
+                                Search
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Error -->
+    @if (ViewBag.Error != null)
+    {
+        <div class="row justify-content-center mb-4">
+
+            <div class="col-md-8 col-lg-6">
+
+                <div class="alert alert-danger border-0 shadow-sm d-flex align-items-center"
+                     role="alert">
+
+                    <span class="me-2">⚠️</span>
+
+                    <div>
+                        @ViewBag.Error
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+
+    <!-- Weather Result -->
+    @if (Model != null)
+    {
+        <div class="row justify-content-center">
+
+            <div class="col-md-8 col-lg-6">
+
+                <div class="card border-0 shadow-sm rounded-4">
+
+                    <div class="card-body p-4">
+
+                        <!-- Location -->
+                        <div class="text-center mb-4">
+
+                            <h2 class="fw-bold mb-1">
+                                @Model.City
+                            </h2>
+
+                            <p class="text-muted mb-0">
+                                Current Weather
+                            </p>
+
+                        </div>
+
+
+                        <!-- Temperature -->
+                        <div class="text-center mb-4">
+
+                            <div class="display-1 fw-bold">
+                                @Model.Temperature.ToString("0.#")°C
+                            </div>
+
+                            <p class="lead text-capitalize text-muted mb-0">
+                                @Model.Description
+                            </p>
+
+                        </div>
+
+
+                        <!-- Weather Details -->
+                        <div class="row g-3">
+
+                            <div class="col-6">
+
+                                <div class="bg-light rounded-3 p-3 text-center h-100">
+
+                                    <div class="fs-3 mb-2">
+                                        🌡️
+                                    </div>
+
+                                    <div class="small text-muted">
+                                        Feels Like
+                                    </div>
+
+                                    <div class="fw-bold fs-5">
+                                        @Model.FeelsLike.ToString("0.#")°C
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-6">
+
+                                <div class="bg-light rounded-3 p-3 text-center h-100">
+
+                                    <div class="fs-3 mb-2">
+                                        💧
+                                    </div>
+
+                                    <div class="small text-muted">
+                                        Humidity
+                                    </div>
+
+                                    <div class="fw-bold fs-5">
+                                        @Model.Humidity%
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
